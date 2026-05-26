@@ -19,12 +19,11 @@ export async function POST(req){
     await writeJsonBlob(LEADS_KEY, [lead, ...leads])
 
     try {
-      const host = req.headers.get('host') || 'localhost:3000'
-      const proto = host.includes('localhost') ? 'http' : 'https'
-      fetch(`${proto}://${host}/api/notify`, {
-        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(lead)
+      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/notify`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(lead)
       }).catch(()=>{})
-    } catch {}
 
     return NextResponse.json({ ok:true, lead })
   } catch(e) {
