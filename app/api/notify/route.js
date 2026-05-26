@@ -73,8 +73,8 @@ h1{color:#071a2f;font-size:22px;margin:0 0 4px}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Yard Loop Leads <info@yard-loop.com>',
-        to: [notifyEmail],
+        from: 'Yard Loop Leads <noreply@yard-loop.com>',
+        to: ['info@yard-loop.com'],
         subject,
         html,
       }),
