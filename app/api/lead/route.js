@@ -15,19 +15,23 @@ export async function POST(req){
 
   try {
     if(!hasBlobToken()) return NextResponse.json({ ok:true, lead, note:'Blob not connected. Lead accepted but not stored.' })
+    
     const leads = await readLeads()
     await writeJsonBlob(LEADS_KEY, [lead, ...leads])
 
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/notify`, {
-        method:'POST',
-        headers:{`Content-Type':'application/json`},
-        body:JSON.stringify(lead)
-      }).catch(()=>{})
+    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/notify`, {
+      method:'POST',
+      headers:{`Content-Type':'application/json`},
+      body:JSON.stringify(lead)
+    }).catch(()=>{})
 
     return NextResponse.json({ ok:true, lead })
-    }
+      
   } catch(e) {
-    return NextResponse.json({ ok:false, error:'Lead accepted, but Blob save failed: ' + e.message, lead }, { status:500 })
+    return NextResponse.json({ 
+      ok:false,
+      error:'Lead accepted, but Blob save failed: ' + e.message, 
+      lead 
+    }, { status:500 })
   }
 }
