@@ -9,11 +9,6 @@ import {
 
 const LEADS_KEY = 'yard-loop-leads.json'
 
-async function readLeads() {
-  const leads = await readJsonBlob(LEADS_KEY, [])
-  return Array.isArray(leads) ? leads : []
-}
-
 export async function POST(req) {
   const body = await req.json().catch(() => ({}))
 
