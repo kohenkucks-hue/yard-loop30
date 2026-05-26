@@ -19,7 +19,7 @@ export async function POST(req){
     await writeJsonBlob(LEADS_KEY, [lead, ...leads])
 
     try {
-      await fetch('${process.env.NEXT_PUBLIC_SITE_URL}/api/notify', {
+      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/notify`, {
         method:'POST',
         headers:{`Content-Type':'application/json`},
         body:JSON.stringify(lead)
