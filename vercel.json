@@ -1,0 +1,20 @@
+{
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, must-revalidate"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
+  "installCommand": "npm install --no-package-lock --no-audit --no-fund --legacy-peer-deps",
+  "buildCommand": "npm run build"
+}
